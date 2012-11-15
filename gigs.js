@@ -1,19 +1,24 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to gigs.";
-  };
+Companies = new Meteor.Collection("companies");
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
+if (Meteor.isClient) {
+
+  Template.gigs.companies = function(){
+    return Companies.find({});
+  }
+
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+
+    if (Companies.find().count() < 2){
+
+      Companies.insert({name: "Hendrick", website: "http://www.hendrick.com", location: "Charlotte, NC"});
+      Companies.insert({name: "Premier", website: "http://www.premierin.com", location: "Charlotte, NC"});
+
+    }
+
+
+
   });
 }
