@@ -2,15 +2,12 @@
 
     $ git clone git@github.com:charlotte-front-end-developers/gigs.git
 
-## Install Meteor.js
+## Run NPM Install
 
-    $ curl https://install.meteor.com | /bin/sh
+    $ cd app
+    $ npm install
 
-## Change directory to gigs
+## Start Express
 
-    $ cd gigs
-
-## Start Meteor.js
-
-    $ meteor
+    $ node app.js
 
