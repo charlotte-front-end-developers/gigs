@@ -2,6 +2,33 @@ doctype 5
 html
   head
     title= title
+    link(href='http://fonts.googleapis.com/css?family=Trocchi')
+    link(href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic')
+    link(href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    .wrapper
+      header
+        h1= title
+      nav.secondary
+        ol
+          li
+            a(href='#') Sign Up
+          li
+            a(href='#') Log In
+
+      block navigation
+        nav.primary
+          ol
+            li
+              a(href='#') Post a Job
+            li
+              a(href='#') Find a Job
+            li
+              a(href='#') About
+            li
+              a(href='#') Contact Us
+
+      block content
+
+      block footer

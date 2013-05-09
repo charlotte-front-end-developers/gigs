@@ -9,6 +9,7 @@
     "express": "3.0.0rc4",
     "jade": "*",
     "stylus": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "nib": "~0.9.1"
   }
 }
