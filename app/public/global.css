@@ -1,0 +1,15 @@
+body{background:#fff;font-family:arial;padding:0;margin:0}
+h1{background:#333740;padding:10px;color:#fafafb}
+h2{margin:0 0 5px;color:#333741}
+a{text-decoration:none;color:#2f323b}
+.message{display:block;width:500px;background:#f6f5f3;border:1px solid #e6e4e2;padding:10px;color:#2f323b;margin:10px auto;text-align:center}
+.form-signin,.form-signup{width:200px;margin:0 auto;text-align:center;}
+.form-signin input,.form-signup input{padding:3px 2px;display:block;margin:0 auto 5px}
+.form-signin button,.form-signup button{background:#fff}
+.btn{padding:3px 5px;border:1px solid #c8e3a5;margin:0 5px;text-decoration:none;color:#9bc34d;background:#fff;}
+.btn:hover{color:#fff;cursor:pointer;background:#c8e3a5}
+.user-list{width:300px;margin:0 auto;background:#f6f5f3;border:1px solid #e6e4e2;padding:10px;color:#2f323b;}
+.user-list ul{list-style-type:none;margin:5px 0;padding:0}
+.user-list li{padding:3px 10px;}
+.user-list li:hover{background:#e6e4e2;cursor:pointer}
+.user-list li a{display:block}
