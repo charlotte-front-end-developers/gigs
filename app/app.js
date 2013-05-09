@@ -8,8 +8,6 @@ var User;
 function createApp(){
 	
 	var app = express();
-	var ArticleProvider = require('./article-provider').ArticleProvider;
-	var UserProvider = require('./user-provider').UserProvider;
 	var timeouts = timeout({ throwError: true, time: 10000});
 	var staticFiles = express.static(path.join(__dirname, 'public'));
 	
