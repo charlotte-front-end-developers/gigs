@@ -1,0 +1,18 @@
+!!! 5
+html
+	head
+	link(rel='stylesheet', type='text/css', href='global.css')
+	
+	body
+		h1 Users
+		
+		div.user-list
+			
+			h2 Current Users
+		
+			ul
+				for user in locals.users
+					li 
+						a(href='/users/#{user.username}') #{user.username}
+			
+		a(href='/').btn Home
