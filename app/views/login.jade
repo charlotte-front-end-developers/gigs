@@ -1,18 +1,7 @@
-!!!5
-html
-	head
-		title Hello
-		link(rel='stylesheet', type='text/css', href='global.css')
-		
-	body
-		h1 Node Test
-		
-		if (locals.message)
-			span.message=locals.message
-		
-		form(method='post', action='/login').form-signin
-			input(type='text', name='username', placeholder='username')
-			input(type='password', name='password', placeholder='password')
-			button(type='submit').btn Login
-			
-		a(href='/signup').btn Sign Up
+extends layout
+block content
+  form(method='post', action='/login').form-signin
+    input(type='text', name='username', placeholder='username')
+    input(type='password', name='password', placeholder='password')
+    button(type='submit').btn Login
+  a(href='/signup').btn Sign Up

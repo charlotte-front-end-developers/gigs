@@ -10,34 +10,44 @@ var jobSchema = new mongoose.Schema({
   email: { type: String, trim: true }
 });
 
-// Compiles the schema into a model, opening (or creating, if
-// nonexistent) the 'PowerUsers' collection in the MongoDB database
 var Job = mongoose.model('Jobs', jobSchema);
 
-// Clear out old data
+/*
+ *  Testing db operations
+ */
+
+// Remove all jobs from db 
 Job.remove({}, function(err) {
   if (err) {
-    console.log ('error deleting old data.');
+    console.log ('Problem removing data');
   }
 });
 
-// Creating one job
+// Create a couple jobs
 var job1 = new Job ({
   position: 'Front end web developer',
-  employer: 'Cool boutique dev shop',
-  email: 'teamlead@coolshop.com'
+  employer: 'Awesome startup',
+  email: 'teamlead@freebeer.com'
 });
 
-job1.save(function (err) {if (err) console.log ('Error on save!');});
+var job2 = new Job ({
+  position: 'JS guru',
+  employer: 'Boutique dev shop',
+  email: 'teamlead@hipsters.com'
+});
 
+var job3 = new Job ({
+  position: 'Web Designer Extraordinaire',
+  employer: 'Cutting edge design firm',
+  email: 'teamlead@madmen.com'
+});
+
+job1.save(function (err) {if (err) console.log ('Error saving job1');});
+job2.save(function (err) {if (err) console.log ('Error saving job2');});
+job3.save(function (err) {if (err) console.log ('Error saving job3');});
 
 exports.list = function(req, res){
-  Job.find({}).exec(function(err, result) {
-    if (!err) {
-      res.end(JSON.stringify(result));
-    }
-    else {
-      res.end('Error in first query. ' + err);
-    }
-  }
-);};
+  Job.find(function(err, result) {
+      res.render('jobs',{locals: {title:'result',jobs:result}});
+  });
+};

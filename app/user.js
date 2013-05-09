@@ -127,17 +127,18 @@ exports.register = function(req, res, next){
 		else console.log('saved!');
 	});
 	res.send('registration success');
-}
+};
 
 exports.list = function (req, res, next){
 	User.find(function (err, users){
 		res.render('users.jade', {
 			locals: {
-				users: users
+				users: users,
+        title: 'Users'
 			}
 		});
 	});
-}
+};
 
 exports.view = function(req, res, next){
 	console.log(req.user.username);
