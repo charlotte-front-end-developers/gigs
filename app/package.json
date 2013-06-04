@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "charlotte-gigs",
   "version": "0.0.1",
-  "author": "Tom Horton <thomasphorton@gmail.com>",
+  "author": "Charlotte Front End Developers (http://www.meetup.com/Charlotte-Front-End-Developers/)",
   "scripts": {
     "start": "node app"
   },
