@@ -1,0 +1,7 @@
+extends layout
+block content
+  form(method='post', action='/login').form-signin
+    input(type='text', name='username', placeholder='username')
+    input(type='password', name='password', placeholder='password')
+    button(type='submit').btn Login
+  a(href='/signup').btn Sign Up

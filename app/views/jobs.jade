@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2 Gigs available
+  for job in locals.jobs
+    li
+      a(href='/users/#{job.position}') #{job.employer}
