@@ -45,6 +45,7 @@ function startApp(){
   app.get('/logout', user.logout);
   app.post('/login', user.login, page.home);
   app.get('/jobs', job.list);
+	app.get('/jobs/new', job.new_job);
   app.get('/signup', signup, page.home);
   app.post('/signup', user.checkIfExists, user.register);
   app.get('/users', user.checkLoggedIn, user.list);
