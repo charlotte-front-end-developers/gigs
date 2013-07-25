@@ -1,3 +1,20 @@
-extends layout
+extends ../layout
 block content
-	hi
+  h2 Create a new job listing
+  ol
+    form(method='post', action='/jobs/create')
+      fieldset
+        li 
+          label(for='position') Position Name
+          input(type='text', id='position', name='position')
+        li
+          label(for='description') Job Description
+          textarea(name='description', id='description')
+        li
+          label(for='employer') Employer
+          input(type='text', id='employer', name='employer')
+        li
+          label(for='email') Email
+          input(type='text', id='email', name='email')
+        li
+          input(type='submit', value='Post')

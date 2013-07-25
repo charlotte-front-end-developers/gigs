@@ -61,5 +61,24 @@ exports.detail = function(req, res){
 };
 
 exports.new_job = function(req, res) {
-	res.render('new_job_form');
+	res.render('jobs/new_job_form', { locals: { title: 'New Job' } });
+};
+
+exports.create = function(req, res, next){
+	var newJob = req.body;
+	
+	var job = new Job({
+		position: newJob.position,
+		description: newJob.description,
+		employer: newJob.employer,
+		email: newJob.email
+	});
+	
+	job.save(function (err, job){
+		if (err) {
+			console.log('error');
+		}
+		else console.log('saved!');
+	});
+	res.send('Job creation success');
 };
