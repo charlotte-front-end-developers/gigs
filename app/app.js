@@ -48,6 +48,7 @@ function startApp(){
   app.post('/login', user.login, page.home);
   app.get('/jobs', job.list);
 	app.get('/jobs/create', job.new_job);
+  app.post('/jobs/create', job.create);
 	app.get('/jobs/:id', job.detail);
   app.get('/signup', signup, page.home);
   app.post('/signup', user.checkIfExists, user.register);
