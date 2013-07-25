@@ -40,6 +40,8 @@ function startApp(){
   var job = require('./routes/job');
   var page = require('./routes/page');
   var app = createApp();
+
+  // Define Routes
   app.get('/', page.home);
   app.all('/u/:id/:op?', user.load);
   app.get('/logout', user.logout);
@@ -53,6 +55,7 @@ function startApp(){
   app.listen(3000);
 }
 
+// Compile stylus to CSS
 function compileStylus(str, path){
   return stylus(str)
     .set('compress', true)
