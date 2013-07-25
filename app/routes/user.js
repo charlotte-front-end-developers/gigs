@@ -126,7 +126,8 @@ exports.register = function(req, res, next){
 		}
 		else console.log('saved!');
 	});
-	res.send('registration success');
+
+	res.redirect('/');
 };
 
 exports.list = function (req, res, next){
