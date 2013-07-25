@@ -36,7 +36,7 @@ function createApp(){
 }
 
 function startApp(){
-  var user = require('./user');
+  var user = require('./routes/user');
   var job = require('./routes/job');
   var page = require('./routes/page');
   var app = createApp();
@@ -48,7 +48,7 @@ function startApp(){
   app.get('/signup', signup, page.home);
   app.post('/signup', user.checkIfExists, user.register);
   app.get('/users', user.checkLoggedIn, user.list);
-  app.get('/u/:id', user.view);
+  app.get('/users/:userID', user.view);
   app.listen(3000);
 }
 

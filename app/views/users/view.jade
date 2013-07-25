@@ -1,7 +1,9 @@
 !!! 5
 html
-	head
-	link(rel='stylesheet', type='text/css', href='global.css')
-	
-	body
-		h1= title
+    head
+    link(rel='stylesheet', type='text/css', href='/global.css')
+
+    body
+        h1= locals.title
+        h2= locals.username
+        small= locals.userid
