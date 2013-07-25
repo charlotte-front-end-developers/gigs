@@ -1,7 +1,10 @@
-extends layout
+extends ../layout
 
 block content
-  h2 Gigs available
+  h2 Details of the Git
   for job in locals.jobs
     li
       a(href='/users/#{job.position}') #{job.employer}
+
+  a(href='/').btn Home
+
