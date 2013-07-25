@@ -1,5 +1,6 @@
 body{background:#fff;font-family:arial;padding:0;margin:0}
-h1{background:#333740;padding:10px;color:#fafafb}
+h1{background:#333740;padding:10px;color:#fafafb;margin:0}
+.subtitle{color:#fafafb;background:#333740;margin:0 0 10px 0}
 h2{margin:0 0 5px;color:#333741}
 a{text-decoration:none;color:#2f323b}
 .message{display:block;width:500px;background:#f6f5f3;border:1px solid #e6e4e2;padding:10px;color:#2f323b;margin:10px auto;text-align:center}

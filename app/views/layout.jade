@@ -1,7 +1,20 @@
-doctype 5
+!!! 5
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title= 'Gigs : ' + locals.title
+    link(rel='stylesheet', type='text/css', href='global.css')
   body
+    h1= 'Gigs'
+    div.subtitle= "A hyperlocal jobs board"
+    header
+      a(href='/').btn Home
+      a(href='/jobs').btn Jobs
+      a(href='/jobs/new').btn New Job
+      a(href='/users').btn Users
+      a(href='/logout').btn Log Out
+    if (locals.message)
+      span.message=locals.message
+    div#content
     block content
+    footer
+      &copy Charlotte
