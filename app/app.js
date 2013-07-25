@@ -5,7 +5,7 @@ var path = require('path');
 
 var User;
 
-function createApp(){
+function createApp() {
   
   var app = express();
   var timeouts = timeout({ throwError: true, time: 10000});
@@ -36,7 +36,7 @@ function createApp(){
 }
 
 function startApp(){
-  var user = require('./user');
+  var user = require('./routes/user');
   var job = require('./routes/job');
   var page = require('./routes/page');
   var app = createApp();
@@ -66,10 +66,6 @@ function signup(req, res, next){
           title: 'Register'
       }
     });
-}
-
-function showUserProfile(req, res, next){
-  res.send('hello');
 }
 
 startApp();
