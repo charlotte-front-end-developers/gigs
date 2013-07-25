@@ -5,7 +5,7 @@
 var mongoose = require ("mongoose");
 
 var jobSchema = new mongoose.Schema({
-	title: { type: String, trim: true },
+	  position: { type: String, trim: true },
 		description: { type: String, trim: false },
 		employer: { type: String, trim: true },
 		email: { type: String, trim: true },
@@ -27,19 +27,19 @@ Job.remove({}, function(err) {
 
 // Create a couple jobs
 var job1 = new Job ({
-	title: 'Front end web developer',
+	  position: 'Front end web developer',
 		employer: 'Awesome startup',
 		email: 'teamlead@freebeer.com'
 });
 
 var job2 = new Job ({
-	title: 'JS guru',
+	  position: 'JS guru',
 		employer: 'Boutique dev shop',
 		email: 'teamlead@hipsters.com'
 });
 
 var job3 = new Job ({
-	title: 'Web Designer Extraordinaire',
+  	position: 'Web Designer Extraordinaire',
 		employer: 'Cutting edge design firm',
 		email: 'teamlead@madmen.com'
 });
@@ -50,7 +50,13 @@ job3.save(function (err) {if (err) console.log ('Error saving job3');});
 
 exports.list = function(req, res){
 	Job.find(function(err, result) {
-		res.render('jobs',{locals: {title:'result',jobs:result}});
+		res.render('jobs/job_list',{locals: {title:'result',jobs:result}});
+	});
+};
+
+exports.detail = function(req, res){
+	Job.find(function(err, result) {
+		res.render('jobs/job_detail',{locals: {title:'result',jobs:result}});
 	});
 };
 
