@@ -67,7 +67,11 @@ exports.detail = function(req, res){
 };
 
 exports.new_job = function(req, res) {
+<<<<<<< HEAD
+	res.render('jobs/new_job_form');
+=======
 	res.render('jobs/new_job_form', { locals: { title: 'New Job' } });
+>>>>>>> 6758155288ebf188a383a2bdf75e6aada6bf4a22
 };
 
 exports.create = function(req, res, next){
