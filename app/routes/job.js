@@ -61,5 +61,5 @@ exports.detail = function(req, res){
 };
 
 exports.new_job = function(req, res) {
-	res.render('jobs/new_job_form');
+	res.render('jobs/new_job_form', { locals: { title: 'New Job' } });
 };
