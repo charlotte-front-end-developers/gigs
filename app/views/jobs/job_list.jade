@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  h2 Gigs available
+  for job in locals.jobs
+    li
+      a(href='/jobs/#{job.id}') #{job.employer}
+
+  a(href='/').btn Home
+
