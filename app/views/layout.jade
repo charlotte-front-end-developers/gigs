@@ -2,7 +2,7 @@
 html
   head
     title= 'Gigs : ' + locals.title
-    link(rel='stylesheet', type='text/css', href='global.css')
+    link(rel='stylesheet', type='text/css', href='/global.css')
   body
     h1= 'Gigs'
     div.subtitle= "A hyperlocal jobs board"
@@ -14,7 +14,7 @@ html
       a(href='/logout').btn Log Out
     if (locals.message)
       span.message=locals.message
-    div#content
-    block content
+    #content
+      block content
     footer
-      &copy Charlotte
+      &copy Charlotte Front-End Developers
