@@ -49,7 +49,7 @@ function startApp(){
   app.get('/signup', signup, page.home);
   app.post('/signup', user.checkIfExists, user.register);
   app.get('/users', user.checkLoggedIn, user.list);
-  app.get('/u/:id', user.view);
+  app.get('/users/:id', user.view);
   app.listen(3000);
 }
 
