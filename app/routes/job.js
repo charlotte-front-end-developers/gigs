@@ -3,6 +3,7 @@
  */
 
 var mongoose = require ("mongoose");
+var ObjectID = require('mongodb').ObjectID;
 
 var jobSchema = new mongoose.Schema({
 	  position: { type: String, trim: true },
@@ -56,12 +57,13 @@ job3.save(function (err) {if (err) console.log ('Error saving job3');});
 
 exports.list = function(req, res){
 	Job.find(function(err, result) {
+          console.log(result);
 		res.render('jobs/job_list',{locals: {title:'result',jobs:result}});
 	});
 };
 
 exports.detail = function(req, res){
-	Job.findOne(req.jobID, function(err, result) {
+	Job.findById(new ObjectID(req.params.id), function(err, result) {
 		res.render('jobs/job_detail',{ title:'Job Details', job:result });
 	});
 };
