@@ -40,20 +40,24 @@ function startApp(){
   var job = require('./routes/job');
   var page = require('./routes/page');
   var app = createApp();
+
+  // Define Routes
   app.get('/', page.home);
   app.all('/u/:id/:op?', user.load);
   app.get('/logout', user.logout);
   app.post('/login', user.login, page.home);
   app.get('/jobs', job.list);
-	app.get('/jobs/new', job.new_job);
+	app.get('/jobs/create', job.new_job);
+  app.post('/jobs/create', job.create);
 	app.get('/jobs/:id', job.detail);
   app.get('/signup', signup, page.home);
   app.post('/signup', user.checkIfExists, user.register);
   app.get('/users', user.checkLoggedIn, user.list);
-  app.get('/u/:id', user.view);
+  app.get('/users/:id', user.view);
   app.listen(3000);
 }
 
+// Compile stylus to CSS
 function compileStylus(str, path){
   return stylus(str)
     .set('compress', true)

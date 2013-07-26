@@ -2,14 +2,14 @@
 html
   head
     title= 'Gigs : ' + locals.title
-    link(rel='stylesheet', type='text/css', href='global.css')
+    link(rel='stylesheet', type='text/css', href='/global.css')
   body
     h1= 'Gigs'
     div.subtitle= "A hyperlocal jobs board"
     header
       a(href='/').btn Home
       a(href='/jobs').btn Jobs
-      a(href='/jobs/new').btn New Job
+      a(href='/jobs/create').btn New Job
       a(href='/users').btn Users
       a(href='/logout').btn Log Out
     if (locals.message)
