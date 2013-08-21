@@ -57,7 +57,6 @@ job3.save(function (err) {if (err) console.log ('Error saving job3');});
 
 exports.list = function(req, res){
 	Job.find(function(err, result) {
-          console.log(result);
 		res.render('jobs/job_list',{locals: {title:'result',jobs:result}});
 	});
 };
