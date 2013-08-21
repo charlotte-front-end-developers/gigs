@@ -148,3 +148,14 @@ exports.view = function(req, res, next){
   });
 };
 
+
+	});
+};
+
+//exports.view = function (req, res, next) {
+//    console.log(req.user.username);
+//    res.render('users/view', {
+//        title: 'Viewing user ' + req.user.username,
+//        user: req.user
+//    });
+//};
