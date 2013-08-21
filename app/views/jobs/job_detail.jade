@@ -1,10 +1,21 @@
 extends ../layout
 
 block content
-  h2 Details of the Git
-  for job in locals.jobs
-    li
-      a(href='/users/#{job.position}') #{job.employer}
+  h2 Details of the Gig
 
-  a(href='/').btn Home
+  p Position: 
+    span.jobitem #{job.position}
+  p Description: 
+    span.jobitem #{job.description}
+  p Company: 
+    span.jobitem #{job.employer}
+  p Contact email: 
+    span.jobitem
+      a(href='mailto:#{job.email}') #{job.email}
+  p Posted on: 
+    span.jobitem #{job.posting_date}
+
+  p 
+    a(href='/jobs').btn Back to Job List
+
 

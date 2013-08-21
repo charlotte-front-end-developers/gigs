@@ -3,6 +3,7 @@
  */
 
 var mongoose = require ("mongoose");
+var ObjectID = require('mongodb').ObjectID;
 
 var jobSchema = new mongoose.Schema({
 	  position: { type: String, trim: true },
@@ -28,20 +29,26 @@ Job.remove({}, function(err) {
 // Create a couple jobs
 var job1 = new Job ({
 	  position: 'Front end web developer',
-		employer: 'Awesome startup',
-		email: 'teamlead@freebeer.com'
+    description: 'Lead front-end dev for social media mobile web app, using cool technologies with ironically pedestrian names.',
+		employer: 'Awesome Startup',
+		email: 'teamlead@freebeer.com',
+    posting_date: '2013-07-02'
 });
 
 var job2 = new Job ({
-	  position: 'JS guru',
+	  position: 'JS Guru',
+    description: 'Be at one with the Javascript to succeed in this job. If you meditate on object-oriented closures, you may be the one to lead us to new incarnations of client-level delight.',
 		employer: 'Boutique dev shop',
-		email: 'teamlead@hipsters.com'
+		email: 'teamlead@hipsters.com',
+    posting_date: '2013-07-16'
 });
 
 var job3 = new Job ({
   	position: 'Web Designer Extraordinaire',
+    description: 'Looking for a modern-day digital Matisse to show our clients that everything they thought they knew about design is passe.',
 		employer: 'Cutting edge design firm',
-		email: 'teamlead@madmen.com'
+		email: 'teamlead@madmen.com',
+    posting_date: '2013-07-23'
 });
 
 job1.save(function (err) {if (err) console.log ('Error saving job1');});
@@ -50,13 +57,14 @@ job3.save(function (err) {if (err) console.log ('Error saving job3');});
 
 exports.list = function(req, res){
 	Job.find(function(err, result) {
+          console.log(result);
 		res.render('jobs/job_list',{locals: {title:'result',jobs:result}});
 	});
 };
 
 exports.detail = function(req, res){
-	Job.find(function(err, result) {
-		res.render('jobs/job_detail',{locals: {title:'result',jobs:result}});
+	Job.findById(new ObjectID(req.params.id), function(err, result) {
+		res.render('jobs/job_detail',{ title:'Job Details', job:result });
 	});
 };
 
