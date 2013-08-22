@@ -12,25 +12,27 @@ function createApp() {
   var staticFiles = express.static(path.join(__dirname, 'public'));
   
   var stylusMiddleware = stylus.middleware({
-    src: path.join(__dirname, 'views'),
+    src: path.join(__dirname, 'styl'),
     dest: path.join(__dirname, 'public/stylesheets'),
     debug: true,
     compile: compileStylus,
     force: true
   });
-  
-  app
-    .set('view engine', 'jade')
-    .set('views', path.join(__dirname, 'views'))
-    .use(timeouts)
-    .use(stylusMiddleware)
-    .use(staticFiles)
-    .use(express.bodyParser())
-    .use(express.methodOverride())
-    .use(express.cookieParser())
-    .use(express.session({
-      secret: 'foobar'
-    }));  
+
+  app.configure(function(){
+    app.set('port', process.env.PORT || 3000);
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
+    app.use(express.favicon());
+    app.use(express.logger('dev'));
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+    app.use(require('stylus').middleware(__dirname + '/public'));
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: 'foobar' }));
+  });
 
   return app;
 }
