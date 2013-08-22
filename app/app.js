@@ -8,17 +8,7 @@ var User;
 function createApp() {
   
   var app = express();
-  var timeouts = timeout({ throwError: true, time: 10000});
-  var staticFiles = express.static(path.join(__dirname, 'public'));
   
-  var stylusMiddleware = stylus.middleware({
-    src: path.join(__dirname, 'styl'),
-    dest: path.join(__dirname, 'public/stylesheets'),
-    debug: true,
-    compile: compileStylus,
-    force: true
-  });
-
   app.configure(function(){
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
@@ -27,7 +17,6 @@ function createApp() {
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(app.router);
     app.use(require('stylus').middleware(__dirname + '/public'));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.cookieParser());
@@ -57,13 +46,6 @@ function startApp(){
   app.get('/users', user.checkLoggedIn, user.list);
   app.get('/users/:id', user.view);
   app.listen(3000);
-}
-
-// Compile stylus to CSS
-function compileStylus(str, path){
-  return stylus(str)
-    .set('compress', true)
-    .set('filename', path);
 }
 
 function signup(req, res, next){
