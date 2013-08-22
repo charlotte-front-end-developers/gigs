@@ -1,97 +1,63 @@
-body
-  background white
-  font-family arial
-  font-size 14pt
-  padding 0
-  margin 0
+@charset 'UTF-8';
+#layout {
+  padding-left: 150px;
+}
+#menu {
+    margin-left: -150px; /* "#menu" width */
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    bottom: 0;
+    z-index: 1000; /* so the menu or its navicon stays above all content */
+    background: #191818;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+#content {
+  width: 70%;
+  margin: 0 auto;
+}
+.job-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-#content
-  margin 1em
-  padding 1em
+.job-list a {
+  color: #444;
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #CCC;
+  text-decoration: none;
+}
 
-footer
-  background #333740
-  color #FAFAFB
-  padding 2em
+.job-list a:hover {
+  background: #DDD;
+}
 
-h1
-  background #333740
-  padding 10px
-  color #FAFAFB
-  margin 0
+.job-details {
+  width: 70%;
+  display: inline-block;
+  overflow: hidden;
+}
 
-.subtitle
-  color #FAFAFB
-  background #333740
-  margin 0 0 10px 0
-  padding 1em
+.job-status {
+  width: 30%;
+  display: inline-block;
+  float: right;
+}
 
-h2
-  margin 0 0 5px
-  color #333741
+.job-list h3 {
+  margin: 0.3em 0;
+}
 
-a
-  text-decoration none
-  color #2F323B
+.job-list h4 {
+  display: inline;
+  margin-right: 0.5em;
+}
 
-.message
-  display block
-  width 500px
-  background #f6f5f3
-  border 1px solid #e6e4e2
-  padding: 10px
-  color #2F323B
-  margin 10px auto
-  text-align center
-    
-.form-signin,
-.form-signup
-  width 200px
-  margin 0 auto
-  text-align center
-  
-  input
-    padding 3px 2px
-    display block
-    margin 0 auto 5px
-    
-  button
-    background white
-    
-.btn
-  padding 3px 5px
-  border 1px solid #C8E3A5
-  margin 0 5px
-  text-decoration none
-  color #9BC34D
-  background white
-  &:hover
-    color white
-    cursor pointer
-    background #C8E3A5;
-
-.user-list
-  width 300px
-  margin 0 auto
-  background #f6f5f3
-  border 1px solid #e6e4e2
-  padding: 10px
-  color #2F323B
-  
-  ul
-    list-style-type none
-    margin 5px 0
-    padding 0
-  
-  li
-    padding 3px 10px
-    &:hover
-      background #e6e4e2
-      cursor pointer
-      
-    a
-      display block
-
-.jobitem
-  font-weight bold
-
+.job-list .job-description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}

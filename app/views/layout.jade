@@ -5,17 +5,26 @@ html
     link(rel='stylesheet', type='text/css', href='/pure-min.css')
     link(rel='stylesheet', type='text/css', href='/global.css')
   body
-    h1= 'Gigs'
-    div.subtitle= "A hyperlocal jobs board"
-    header
-      a(href='/').btn Home
-      a(href='/jobs').btn Jobs
-      a(href='/jobs/create').btn New Job
-      a(href='/users').btn Users
-      a(href='/logout').btn Log Out
-    if (locals.message)
-      span.message=locals.message
-    #content
-      block content
-    footer
-      &copy Charlotte Front-End Developers
+
+  div.pure-g-r#layout
+
+    div.pure-u-1#menu
+      div.pure-menu.pure-menu-open
+        a.pure-menu-heading(href='/')="Gigs"
+        ul
+          a(href='/jobs')="Jobs"
+          a(href='/jobs/create')="New Job"
+          a(href='/users')="View Users"
+          a(href='/logout')="Log Out"
+
+    div.pure-u-1#main
+      div.content
+        h1= 'Gigs'
+        div.subtitle= "A hyperlocal jobs board"
+
+        if (locals.message)
+          span.message=locals.message
+        #content
+          block content
+        footer
+          &copy Charlotte Front-End Developers

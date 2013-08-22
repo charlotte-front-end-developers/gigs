@@ -1,19 +1,63 @@
-body{background:#fff;font-family:arial;font-size:14pt;padding:0;margin:0}
-#content{margin:1em;padding:1em}
-footer{background:#333740;color:#fafafb;padding:2em}
-h1{background:#333740;padding:10px;color:#fafafb;margin:0}
-.subtitle{color:#fafafb;background:#333740;margin:0 0 10px 0;padding:1em}
-h2{margin:0 0 5px;color:#333741}
-a{text-decoration:none;color:#2f323b}
-.message{display:block;width:500px;background:#f6f5f3;border:1px solid #e6e4e2;padding:10px;color:#2f323b;margin:10px auto;text-align:center}
-.form-signin,.form-signup{width:200px;margin:0 auto;text-align:center;}
-.form-signin input,.form-signup input{padding:3px 2px;display:block;margin:0 auto 5px}
-.form-signin button,.form-signup button{background:#fff}
-.btn{padding:3px 5px;border:1px solid #c8e3a5;margin:0 5px;text-decoration:none;color:#9bc34d;background:#fff;}
-.btn:hover{color:#fff;cursor:pointer;background:#c8e3a5}
-.user-list{width:300px;margin:0 auto;background:#f6f5f3;border:1px solid #e6e4e2;padding:10px;color:#2f323b;}
-.user-list ul{list-style-type:none;margin:5px 0;padding:0}
-.user-list li{padding:3px 10px;}
-.user-list li:hover{background:#e6e4e2;cursor:pointer}
-.user-list li a{display:block}
-.jobitem{font-weight:bold}
+@charset 'UTF-8';
+#layout {
+	padding-left: 150px;
+}
+#menu {
+    margin-left: -150px; /* "#menu" width */
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    bottom: 0;
+    z-index: 1000; /* so the menu or its navicon stays above all content */
+    background: #191818;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+#content {
+  width: 70%;
+  margin: 0 auto;
+}
+.job-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.job-list a {
+  color: #444;
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #CCC;
+  text-decoration: none;
+}
+
+.job-list a:hover {
+  background: #DDD;
+}
+
+.job-details {
+  width: 70%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.job-status {
+  width: 30%;
+  display: inline-block;
+  float: right;
+}
+
+.job-list h3 {
+  margin: 0.3em 0;
+}
+
+.job-list h4 {
+  display: inline;
+  margin-right: 0.5em;
+}
+
+.job-list .job-description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}

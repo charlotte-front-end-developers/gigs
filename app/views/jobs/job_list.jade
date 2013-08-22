@@ -2,9 +2,16 @@ extends ../layout
 
 block content
   h2 Gigs available
-  for job in locals.jobs
-    li
-      a(href='/jobs/#{job.id}') #{job.employer}
+  ul.job-list
+    for job in locals.jobs
+      li
+        a(href='/jobs/#{job.id}')
+          div.job-details
+            h3 #{job.position}
+            h4 #{job.employer} 
+            span.job-description #{job.description}
+          div.job-status
+            span="job status"
 
   a(href='/').btn Home
 
