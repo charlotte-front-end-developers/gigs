@@ -1,96 +1,88 @@
-var express = require('express');
-var timeout = require('connect-timeout');
-var stylus = require('stylus');
-var path = require('path');
+/**
+ * Module dependencies.
+ */
 
-var User;
+var express = require('express')
+	, http = require('http')
+	, path = require('path')
+  , crypto = require('crypto')
 
-function createApp(){
-	
-	var app = express();
-	var timeouts = timeout({ throwError: true, time: 10000});
-	var staticFiles = express.static(path.join(__dirname, 'public'));
-	
-	/*User.remove({}, function(err) { 
-	   console.log('collection removed') 
-	});*/
-		
-	var stylusMiddleware = stylus.middleware({
-		src: path.join(__dirname, 'views'),
-		dest: path.join(__dirname, 'public'),
-		debug: true,
-		compile: compileStylus,
-		force: true
-	});
-	
-	app
-		.set('view engine', 'jade')
-		.set('views', path.join(__dirname, 'views'))
-		.use(timeouts)
-		.use(stylusMiddleware)
-		.use(staticFiles)
-		.use(express.bodyParser())
-		.use(express.methodOverride())
-		.use(express.cookieParser())
-		.use(express.session({
-			secret: 'foobar'
-		}));	
+  , _ = require('underscore')
+  , stylus = require('stylus')
+  , mongoose = require('mongoose')
 
-	return app;
-}
+	, timeout = require('connect-timeout')
+  , flash = require('connect-flash')
+  
+  , passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy
 
-function startApp(){
-	var user = require('./user');
-	var app = createApp();
-	app.get('/', showHomepage);
-	app.all('/u/:id/:op?', user.load);
-	app.get('/logout', user.logout);
-	app.post('/login', user.login, showHomepage);
-	app.get('/jobs', user.checkLoggedIn, listJobs);
-	app.get('/signup', signup);
-	app.post('/signup', user.checkIfExists, user.register);
-	app.get('/users', user.checkLoggedIn, user.list);
-	app.get('/u/:id', user.view);
-	app.listen(3000);
-}
+  , User = require('./models/user')
+;
 
-function compileStylus(str, path){
-	return stylus(str)
-		.set('compress', true)
-		.set('filename', path);
-}
+var app = express();
 
-function showHomepage(req, res, next){
-	console.log('foo', req.session.user);
-	if (req.session.user) {
-		res.render('home.jade',
-			{ locals: {
-					title: 'Home Page'
-			}
-		});
-	}
-	else {
-		res.render('login.jade', 
-			{ locals: {
-	            title: 'Node Test'
-	        }
-		});
-	}
-}
+/**
+ * Configuring app.
+ */
 
-function signup(req, res, next){
-	res.render('signup.jade');
-}
+app.configure(function(){
+	app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session({ secret: 'keyboard cat' }));
+
+  app.use(flash());
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(stylus.middleware(__dirname + '/public'));
+});
 
 
-function listJobs(req, res, next){
-	res.send('Here are the jobs');
-}
+app.configure('development', function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
 
+app.configure('production', function(){
+    app.use(express.errorHandler());
+});
 
+/**
+ * Auth Passport
+ */
 
-function showUserProfile(req, res, next){
-	res.send('hello');
-}
+passport.use(User.createStrategy());
 
-startApp();
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+/**
+ * Connect To Database
+ */
+
+mongoose.connect('mongodb://localhost/test');
+
+/**
+ * Routes.
+ */
+
+require('./routes')(app);
+
+/**
+ * Start Server.
+ */
+
+http.createServer(app).listen(3000, '127.0.0.1', function() {
+    console.log("Express server listening on %s:%d in %s mode", '127.0.0.1', 3000, app.settings.env);
+});
