@@ -5,9 +5,7 @@
 var express = require('express')
 	, http = require('http')
 	, path = require('path')
-  , crypto = require('crypto')
 
-  , _ = require('underscore')
   , stylus = require('stylus')
   , mongoose = require('mongoose')
 
@@ -51,11 +49,11 @@ app.configure(function(){
 
 
 app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-    app.use(express.errorHandler());
+  app.use(express.errorHandler());
 });
 
 /**
@@ -84,5 +82,5 @@ require('./routes')(app);
  */
 
 http.createServer(app).listen(3000, '127.0.0.1', function() {
-    console.log("Express server listening on %s:%d in %s mode", '127.0.0.1', 3000, app.settings.env);
+  console.log("Express server listening on %s:%d in %s mode", '127.0.0.1', 3000, app.settings.env);
 });
