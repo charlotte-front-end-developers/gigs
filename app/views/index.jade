@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  if (user)
+    if (messages)
+      .alert.alert-success
+        p #{messages}
+    You are currently logged in as #{user.username}
+    div
+      ul
+        li Name: #{user.firstName} #{user.lastName}
+      ul
+        li Address: #{user.streetAddress} #{user.city}, #{user.state}

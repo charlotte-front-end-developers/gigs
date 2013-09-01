@@ -19,10 +19,10 @@ models.db.once('open', function callback () {
  * Create CompanySchema.
  */
 
-var CompanySchema = new models.Scchema({
+var CompanySchema = new models.Schema({
 	updated: {type: Date, default: Date.now},
 	name: { type: String, default: ''},
-	email: { type: String, default: ''}
+	email: { type: String, default: ''},
 	post: [
 		{
 			title: { type: String, default: ''},

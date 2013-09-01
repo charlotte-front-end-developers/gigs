@@ -4,6 +4,7 @@
 
 var passport = require('passport')
   , User = require('./models/user')
+  , CompanyUser = require('./models/company')
   , url = require('url')
 ;
 
@@ -26,7 +27,8 @@ module.exports = function (app) {
       , query = url_parts.query
     ;
 
-    if ( query.register == 'Employers' ) {
+    // make this look better monty
+    if( query.register == 'Employers' ) {
       res.render('register-employer', { } );
     } else {
       res.render('register-employee', { });
@@ -35,6 +37,9 @@ module.exports = function (app) {
   });
 
   app.post('/register', function(req, res) {
+
+    // if(  )
+
     User.register(new User(
       { username : req.body.username,
         emal: req.body.email,
