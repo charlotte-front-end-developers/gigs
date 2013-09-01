@@ -38,8 +38,7 @@ module.exports = function (app) {
 
   app.post('/register', function(req, res) {
 
-    if( req.body.username != undefined ) {
-      console.log(req.body.username);
+    if( req.body.lastname != undefined ) {
       
       User.register(new User(
         { username : req.body.username,
@@ -58,13 +57,14 @@ module.exports = function (app) {
       });
 
     } else {
+
       CompanyUser.register(new CompanyUser(
         { email : req.body.email,
+          username : req.body.username,
           name : req.body.name,
         }),
-        req.body.password, function(err, companyuser) {
+        req.body.password, function(err, q) {
           if (err) {
-            console.log(err);
             return res.render('register-employer', {companyuser : companyuser});
           }
         res.redirect('/');
@@ -75,7 +75,7 @@ module.exports = function (app) {
   });
 
   app.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+    res.render('login', { companyuser : req.companyuser });
   });
 
   app.post('/login', passport.authenticate('local'), function(req, res) {
