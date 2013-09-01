@@ -3,8 +3,9 @@
  */
 
 var models = require('../bin/imports/models')
-, passport = require('passport')
-	, passportLocalMongoose = require('passport-local-mongoose');
+	, passport = require('passport')
+	, passportLocalMongoose = require('passport-local-mongoose')
+;
 
 /**
  * Connect db.
@@ -20,7 +21,8 @@ models.db.once('open', function callback () {
  */
 
 var CompanySchema = new models.Schema({
-	updated: {type: Date, default: Date.now},
+	updated: { type: Date, default: Date.now },
+	username: { type: String, default: ''},
 	name: { type: String, default: ''},
 	email: { type: String, default: ''},
 	post: [
@@ -31,5 +33,12 @@ var CompanySchema = new models.Schema({
 			tags: [String]
 		}
 	]
+});
 
-})
+CompanySchema.plugin(passportLocalMongoose);
+var CompanyUser = models.mongoose.model('CompanyUser', CompanySchema);
+module.exports = models.mongoose.model('CompanyUser', CompanyUser);
+
+
+
+

@@ -38,23 +38,40 @@ module.exports = function (app) {
 
   app.post('/register', function(req, res) {
 
-    // if(  )
+    if( req.body.username != undefined ) {
+      console.log(req.body.username);
+      
+      User.register(new User(
+        { username : req.body.username,
+          email: req.body.email,
+          firstName : req.body.firstname,
+          lastName : req.body.lastname,
+          phone : req.body.phone,
+          title: req.body.title,
+          updated: req.body.updated
+        }), 
+        req.body.password,  function(err, user) {
+          if (err) {
+            return res.render('register-employee', { user : user });
+          }
+        res.redirect('/');
+      });
 
-    User.register(new User(
-      { username : req.body.username,
-        emal: req.body.email,
-        firstName : req.body.firstname,
-        lastName : req.body.lastname,
-        phone : req.body.phone,
-        title: req.body.title,
-        updated: req.body.updated
-      }), 
-      req.body.password,  function(err, user) {
-        if (err) {
-          return res.render('register', { user : user });
-        }
-      res.redirect('/');
-    });
+    } else {
+      CompanyUser.register(new CompanyUser(
+        { email : req.body.email,
+          name : req.body.name,
+        }),
+        req.body.password, function(err, companyuser) {
+          if (err) {
+            console.log(err);
+            return res.render('register-employer', {companyuser : companyuser});
+          }
+        res.redirect('/');
+      });
+
+    }
+
   });
 
   app.get('/login', function(req, res) {
