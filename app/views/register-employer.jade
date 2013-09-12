@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h2 Employer Register
+    form(action="/register",method="post")
+      div
+        label Email
+        input(type="text",name="email")
+      div
+        label Username
+        input(type="text",name="username")
+      div
+        label Name
+        input(type="text",name="name")
+      div
+        label Password
+        input(type="password",name="password")
+      div
+        input(type="submit",value="Register")

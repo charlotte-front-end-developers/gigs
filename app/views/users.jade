@@ -1,9 +1,0 @@
-extends layout
-block content
-  div.user-list
-    h2 Current Users
-    ul
-      for user in locals.users
-        li
-          a(href='/users/#{user.username}') #{user.username}
-  a(href='/').btn Home

@@ -1,59 +1,91 @@
-var express = require('express');
-var timeout = require('connect-timeout');
-var stylus = require('stylus');
-var path = require('path');
+/**
+ * Module dependencies.
+ */
 
-var User;
+var express = require('express')
+	, http = require('http')
+	, path = require('path')
 
-function createApp() {
+  , stylus = require('stylus')
+  , mongoose = require('mongoose')
+
+	, timeout = require('connect-timeout')
+  , flash = require('connect-flash')
   
-  var app = express();
-  
-  app.configure(function(){
-    app.set('port', process.env.PORT || 3000);
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
-    app.use(express.favicon());
-    app.use(express.logger('dev'));
+  , passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy
+
+  , User = require('./models/user')
+;
+
+var app = express();
+
+/**
+ * Configuring app.
+ */
+
+app.configure(function(){
+	app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(require('stylus').middleware(__dirname + '/public'));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.cookieParser());
     app.use(express.session({ secret: 'foobar' }));
-  });
 
-  return app;
-}
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session({ secret: 'keyboard cat' }));
 
-function startApp(){
-  var user = require('./routes/user');
+  app.use(flash());
   var job = require('./routes/job');
   var page = require('./routes/page');
-  var app = createApp();
-
   // Define Routes
   app.get('/', page.home);
-  app.all('/u/:id/:op?', user.load);
-  app.get('/logout', user.logout);
-  app.post('/login', user.login, page.home);
-  app.get('/jobs', job.list);
-	app.get('/jobs/create', job.new_job);
   app.post('/jobs/create', job.create);
 	app.get('/jobs/:id', job.detail);
   app.get('/signup', signup, page.home);
-  app.post('/signup', user.checkIfExists, user.register);
-  app.get('/users', user.checkLoggedIn, user.list);
-  app.get('/users/:id', user.view);
-  app.listen(3000);
-}
 
-function signup(req, res, next){
-  res.render('signup.jade',
-      { locals: {
-          title: 'Register'
-      }
-    });
-}
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(stylus.middleware(__dirname + '/public'));
+});
 
-startApp();
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+app.configure('production', function(){
+  app.use(express.errorHandler());
+});
+/**
+ * Auth Passport
+ */
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+/**
+ * Connect To Database
+ */
+mongoose.connect('mongodb://localhost/test');
+
+/**
+ * Routes.
+ */
+
+require('./routes')(app);
+
+/**
+ * Start Server.
+ */
+
+http.createServer(app).listen(3000, '127.0.0.1', function() {
+  console.log("Express server listening on %s:%d in %s mode", '127.0.0.1', 3000, app.settings.env);
+});

@@ -2,3 +2,4 @@
 *.tmp
 *.log
 app/node_modules
+/bin

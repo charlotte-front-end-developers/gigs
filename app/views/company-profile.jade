@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  if (companyuser)
+    if (messages)
+      .alert.alert-success
+        p #{messages}
+    You are currently logged in as #{companyuser.name}

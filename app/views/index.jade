@@ -1,5 +1,12 @@
 extends layout
 block content
-  p Welcome to Gigs, a hyperlocal job board.
-  p To make the most of Gigs, 
-    a(href='/signup') Sign Up
+  if (user)
+    if (messages)
+      .alert.alert-success
+        p #{messages}
+    You are currently logged in as #{user.username}
+    div
+      ul
+        li Name: #{user.firstName} #{user.lastName}
+      ul
+        li Address: #{user.streetAddress} #{user.city}, #{user.state}

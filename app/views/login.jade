@@ -1,7 +1,16 @@
 extends layout
+
 block content
-  form(method='post', action='/login').form-signin
-    input(type='text', name='username', placeholder='username')
-    input(type='password', name='password', placeholder='password')
-    button(type='submit').btn Login
-  a(href='/signup').btn Sign Up
+  h2 Log In
+  
+  form(action="/login",method="post")
+    div
+      label Username
+      input(type="text",name="username")
+    
+    div
+      label Password
+      input(type="password",name="password")
+    
+    div
+      input(type="submit",value="Log In")
