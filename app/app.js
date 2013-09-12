@@ -46,11 +46,6 @@ app.configure(function(){
   var job = require('./routes/job');
   var page = require('./routes/page');
   // Define Routes
-  app.get('/', page.home);
-  app.post('/jobs/create', job.create);
-	app.get('/jobs/:id', job.detail);
-  app.get('/signup', signup, page.home);
-
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
